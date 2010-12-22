@@ -1,7 +1,7 @@
 <html>
     <head>
         <style type="text/css">
-            body{background-image:url("images/fecba_logo_blast.jpg");
+body{background-image:url("images/<%= @picture %>");
 background-attachment:fixed;
 background-repeat:no-repeat;
 background-position:center;}
@@ -13,8 +13,9 @@ table, tr, td {
 </style>
     <!--you just lost the game-->
     </head>
-    <body background="images/fecba_logo_blast.jpg">
+    <body background="/images/fecba_logo_blast.jpg">
 <center>
-<input style="width:450px;" type="text" name="FirstName" value="Type Command Here" /><br />
+<input style="width:450px;" type="text" name="FirstName" value="<%= rand(2) %>
+" /><br />
     </body>
 </html>
