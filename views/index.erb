@@ -15,7 +15,9 @@ table, tr, td {
     </head>
     <body background="/images/fecba_logo_blast.jpg">
 <center>
-<input style="width:450px;" type="text" name="FirstName" value="<%= rand(2) %>
+<form action="/go" method="post">
+<input style="width:450px;" type="text" name="command" value="<%= rand(2) %>
 " /><br />
+	<input type="submit" value="FECBA it" /></form>
     </body>
 </html>

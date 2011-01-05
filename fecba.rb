@@ -8,3 +8,9 @@ get '/' do
 	end
 	erb :index
 end
+post '/go' do
+	words=params["command"].split(" ")
+	if words[0]=="log-in"
+		"literrally#{words[1]}"
+	end
+end
