@@ -32,9 +32,11 @@ end
 
 post '/go' do
     words=params["command"].split(" ")
+
     if words[0]=="login"
-        DB.run("INSERT INTO logins (username) VALUES ('bob');")
+        DB.run("INSERT INTO logins (username) VALUES ('#{words[1]}');")
     end
+    words.inspect()
 end
 
 enable :inline_templates
