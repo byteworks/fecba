@@ -34,8 +34,8 @@ get '/list' do
 end
 
 post '/go' do
-	words=params["command"].split(" ")
-	if words[0]=="log-in"
-		"literrally#{words[1]}"
-	end
+    words=params["command"].split(" ")
+    if words[0]=="login"
+        DB.run("INSERT INTO logins (username) VALUES ('bob');")
+    end
 end
