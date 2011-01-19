@@ -26,10 +26,7 @@ get '/list' do
     
     records = ""
     @login_list = DB.fetch( "SELECT * FROM logins" )
-    @login_list.each do |r|
-        records = records + r[:username]
-    end
-    records
+    erb :list
         
 end
 
@@ -39,3 +36,17 @@ post '/go' do
         DB.run("INSERT INTO logins (username) VALUES ('bob');")
     end
 end
+
+enable :inline_templates
+
+__END__
+@@ list
+<html>
+<body>
+<ul>
+<% for login in @login_list %>
+    <li><%= login[:username] %>&#124;</li>
+<% end %>
+</ul>
+</body>
+</html>
