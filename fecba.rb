@@ -3,7 +3,7 @@ require 'sinatra'
 require 'sequel'
 require 'erb'
 
-DB = Sequel.sqlite
+DB = Sequel.connect('sqlite://fecba.db')
 
 DB.create_table? :logins do
     primary_key :id
@@ -12,7 +12,6 @@ DB.create_table? :logins do
     # DateTime :logout_date
 end
 
-DB.run("INSERT INTO logins (username) VALUES ('bob');")
 
 get '/' do
 	if rand(2)== 1
