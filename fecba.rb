@@ -1,5 +1,19 @@
+require 'rubygems'
 require 'sinatra'
+require 'sequel'
 require 'erb'
+
+DB = Sequel.sqlite
+
+DB.create_table? :logins do
+    primary_key :id
+    String :username
+    # DateTime :login_date
+    # DateTime :logout_date
+end
+
+DB.run("INSERT INTO logins (username) VALUES ('bob');")
+
 get '/' do
 	if rand(2)== 1
 		@picture="fecba_logo_blast.jpg"
@@ -8,6 +22,18 @@ get '/' do
 	end
 	erb :index
 end
+
+get '/list' do
+    
+    records = ""
+    @login_list = DB.fetch( "SELECT * FROM logins" )
+    @login_list.each do |r|
+        records = records + r[:username]
+    end
+    records
+        
+end
+
 post '/go' do
 	words=params["command"].split(" ")
 	if words[0]=="log-in"
