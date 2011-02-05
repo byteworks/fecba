@@ -4,6 +4,12 @@
             <!--
             body
             {
+
+            <%  if rand(2)== 1
+                    @picture="fecba_logo_blast.jpg"
+                else
+                    @picture="fecba_logo_rattle.png"
+                end %>
                 background-image:url("images/<%= @picture %>");
                 background-attachment:fixed;
                 background-repeat:no-repeat;
