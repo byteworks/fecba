@@ -19,6 +19,7 @@ get '/' do
     else
         @picture="fecba_logo_rattle.png"
     end
+    @message = ""
     erb :index
 end
 
@@ -35,8 +36,9 @@ post '/go' do
         sql = "INSERT INTO logins (username, login_date) " +
               "VALUES ('#{words[1]}', datetime('now'));"
         DB.run(sql)
+        @message = "#{words[1]} logged in successfully"
     end
-    redirect '/list'
+    erb :index
 end
 
 enable :inline_templates

@@ -23,6 +23,10 @@
 
         <center>
 
+            <% if @message %>
+            <%= @message %><br />
+            <% end %>
+
             <form action="/go" method="post">
 
                 <input style="width:450px;" type="text" 
