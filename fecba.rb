@@ -33,6 +33,11 @@ post '/go' do
         DB.run(sql)
         @message = "#{words[1]} logged in successfully"
     end
+    if words[0]=="logout"
+        sql = "SELECT * FROM logins WHERE username = '#{words[1]}' ORDER BY login_date DESC"
+        @login_list=DB.fetch(sql)
+        @message = "I'm going to set the logout date on this record:\n #{@login_list.first[:id]}"
+    end
     erb :index
 end
 
