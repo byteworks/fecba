@@ -36,9 +36,11 @@ post '/go' do
     if words[0]=="logout"
         sql = "SELECT * FROM logins WHERE username = '#{words[1]}' ORDER BY login_date DESC"
         @login_list=DB.fetch(sql)
-        @message = "I'm going to set the logout date on this record:\n #{@login_list.first[:id]}"
         DB.run("UPDATE LOGINS SET logout_date = datetime('now') WHERE id = #{@login_list.first[:id]}")
-        redirect '/list'
+        sql = "SELECT * FROM logins WHERE username = '#{words[1]}' ORDER BY login_date DESC"
+        @login_list=DB.fetch(sql)
+        duration = @login_list.first[:logout_date] - @login_list.first[:login_date] 
+        @message = "thanks nate, you were logged in for #{duration / 60} minutes."
     end
     erb :index
 end
@@ -50,9 +52,12 @@ __END__
 <html>
 <body>
 <ul>
-<% for login in @login_list %>
-    <li><%= login[:username] %>&#124;<%= login[:login_date] %><%= login[:logout_date] %></li>
-<% end %>
+<%= @message %>
+<%= @login_list.first[:login_date] %>|
+<%= @login_list.first[:logout_date] %>
+<%= %>
+<%= (@login_list.first[:logout_date] - @login_list.first[:login_date]).class %>
+
 </ul>
 </body>
 </html>
